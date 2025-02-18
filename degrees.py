@@ -110,8 +110,7 @@ def shortest_path(source, target):
 
         # check if node is the target actor
         if (node.state == target):
-            print("Encontrei o caminho")
-            return None
+            return get_path(node)
 
         # expanding node
         for movie, person in neighbors_for_person(node.state):
@@ -127,6 +126,13 @@ def shortest_path(source, target):
 
             frontier.add(expanded_node)
 
+def get_path(node):
+    path = []
+    while node:
+        path.append((node.state, node.action))
+        node = node.parent
+    path.reverse()
+    return path 
 
 
 def person_id_for_name(name):
