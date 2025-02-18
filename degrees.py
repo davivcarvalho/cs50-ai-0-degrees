@@ -92,8 +92,41 @@ def shortest_path(source, target):
     If no possible path, returns None.
     """
 
-    # TODO
-    raise NotImplementedError
+    node = Node(source, None, None)
+    frontier = StackFrontier()
+    explored_set = set()
+
+    #init the frontier with start node
+    frontier.add(node)
+
+    while True: 
+        # return None if not find a possible path
+        if (frontier.empty()):
+            return None
+        
+        # get node from the frontier and remove it
+        node = frontier.remove()
+        explored_set.add(node.state)
+
+        # check if node is the target actor
+        if (node.state == target):
+            print("Encontrei o caminho")
+            return None
+
+        # expanding node
+        for movie, person in neighbors_for_person(node.state):
+            expanded_node = Node(person, node, movie)
+
+            # skip loop if alraeady in frontier
+            if frontier.contains_state(expanded_node):
+                continue
+
+            # skip loop if alraeady explored
+            if any(explored == person for explored in explored_set):
+                continue
+
+            frontier.add(expanded_node)
+
 
 
 def person_id_for_name(name):
