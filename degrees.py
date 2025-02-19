@@ -93,7 +93,7 @@ def shortest_path(source, target):
     """
 
     node = Node(source, None, None)
-    frontier = StackFrontier()
+    frontier = QueueFrontier()
     explored_set = set()
 
     #init the frontier with start node
@@ -128,11 +128,12 @@ def shortest_path(source, target):
 
 def get_path(node):
     path = []
-    while node:
-        path.append((node.state, node.action))
+    while node.parent:
+        path.append((node.action, node.state))
         node = node.parent
     path.reverse()
     return path 
+
 
 
 def person_id_for_name(name):
