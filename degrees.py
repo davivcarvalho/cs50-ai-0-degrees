@@ -92,7 +92,7 @@ def shortest_path(source, target):
     If no possible path, returns None.
     """
 
-    node = Node(source, None, None)
+    node = Node(source, None, None, None)
     frontier = QueueFrontier()
     explored_set = set()
 
@@ -105,7 +105,7 @@ def shortest_path(source, target):
             return None
         
         # get node from the frontier and remove it, add node to explored_set
-        node = frontier.remove()
+        node = frontier.get_one_and_remove()
         explored_set.add(node.state)
 
         # check if node is the target actor
@@ -114,7 +114,7 @@ def shortest_path(source, target):
 
         # expanding node
         for movie, person in neighbors_for_person(node.state):
-            expanded_node = Node(person, node, movie)
+            expanded_node = Node(person, node, movie, len(people[person]['movies']))
 
             # return path if expanded_node is target
             if (expanded_node.state == target):

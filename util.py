@@ -1,8 +1,12 @@
 class Node():
-    def __init__(self, state, parent, action):
+    def __init__(self, state, parent, action, heuristic_value):
         self.state = state
         self.parent = parent
         self.action = action
+        self.heuristic_value = heuristic_value
+
+    def get_heuristic_value(self):
+        return self.heuristic_value
 
 
 class StackFrontier():
@@ -18,7 +22,7 @@ class StackFrontier():
     def empty(self):
         return len(self.frontier) == 0
 
-    def remove(self):
+    def get_one_and_remove(self):
         if self.empty():
             raise Exception("empty frontier")
         else:
@@ -28,8 +32,15 @@ class StackFrontier():
 
 
 class QueueFrontier(StackFrontier):
+    def sortFn(self, node):
+        return node.get_heuristic_value()
 
-    def remove(self):
+    def add(self, node):
+        self.frontier.append(node)
+        self.frontier.sort(key=self.sortFn, reverse=True)
+
+
+    def get_one_and_remove(self):
         if self.empty():
             raise Exception("empty frontier")
         else:
