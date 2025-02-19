@@ -116,6 +116,10 @@ def shortest_path(source, target):
         for movie, person in neighbors_for_person(node.state):
             expanded_node = Node(person, node, movie)
 
+            # return path if expanded_node is target
+            if (expanded_node.state == target):
+                return get_path(expanded_node)
+
             # skip loop if expanded_node alreaady in frontier
             if frontier.contains_state(expanded_node):
                 continue
