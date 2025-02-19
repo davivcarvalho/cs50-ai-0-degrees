@@ -8,7 +8,6 @@ class Node():
     def get_heuristic_value(self):
         return self.heuristic_value
 
-
 class StackFrontier():
     def __init__(self):
         self.frontier = []
@@ -38,7 +37,6 @@ class QueueFrontier(StackFrontier):
     def add(self, node):
         self.frontier.append(node)
         self.frontier.sort(key=self.sortFn, reverse=True)
-
 
     def get_one_and_remove(self):
         if self.empty():
