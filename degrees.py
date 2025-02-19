@@ -104,7 +104,7 @@ def shortest_path(source, target):
         if (frontier.empty()):
             return None
         
-        # get node from the frontier and remove it
+        # get node from the frontier and remove it, add node to explored_set
         node = frontier.remove()
         explored_set.add(node.state)
 
@@ -130,6 +130,7 @@ def shortest_path(source, target):
 
             frontier.add(expanded_node)
 
+
 def get_path(node):
     path = []
     while node.parent:
@@ -137,7 +138,6 @@ def get_path(node):
         node = node.parent
     path.reverse()
     return path 
-
 
 
 def person_id_for_name(name):
