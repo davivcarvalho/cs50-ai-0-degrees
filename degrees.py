@@ -105,6 +105,7 @@ def shortest_path(source, target):
         global moviments
         moviments += 1
         path_cost += 1
+
         # return None if not find a possible path
         if (frontier.empty()):
             return None
@@ -113,9 +114,7 @@ def shortest_path(source, target):
         node = frontier.get_one_and_remove()
         explored_set.add(node.state)
 
-        # check if node is the target actor
-        if (node.state == target):
-            return get_path(node)
+        print(f"Moviments: {moviments} | A* cost: {node.heuristic_value} | Frontier Len: {frontier.get_lenght()}")
 
         # expanding node
         for movie, neighbor in neighbors_for_person(node.state):
@@ -142,7 +141,9 @@ def get_a_star_n(neighbor, movie, path_cost):
     for movie in people[neighbor]['movies']:
         neighbor_movies_stars = len(movies[movie]['stars'])
 
-    return (len(people[neighbor]['movies']) + neighbor_movies_stars)/1000 - path_cost
+    neighbor_movies = len(people[neighbor]['movies'])
+
+    return ((neighbor_movies + neighbor_movies_stars)/500) - path_cost
 
 def get_path(node):
     print(f"{moviments} movimentos necessários!")

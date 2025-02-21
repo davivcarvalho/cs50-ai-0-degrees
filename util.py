@@ -28,6 +28,9 @@ class StackFrontier():
             node = self.frontier[-1]
             self.frontier = self.frontier[:-1]
             return node
+    
+    def get_lenght(self):
+        return len(self.frontier)
 
 
 class QueueFrontier(StackFrontier):
@@ -36,12 +39,13 @@ class QueueFrontier(StackFrontier):
 
     def add(self, node):
         self.frontier.append(node)
-        self.frontier.sort(key=self.sortFn, reverse=True)
-
+        
     def get_one_and_remove(self):
         if self.empty():
             raise Exception("empty frontier")
         else:
+            self.frontier.sort(key=self.sortFn, reverse=True)
+
             node = self.frontier[0]
             self.frontier = self.frontier[1:]
             return node
