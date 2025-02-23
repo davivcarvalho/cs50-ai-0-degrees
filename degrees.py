@@ -114,7 +114,7 @@ def shortest_path(source, target):
         node = frontier.get_one_and_remove()
         explored_set.add(node.state)
 
-        print(f"Moviments: {moviments} | A* cost: {node.heuristic_value} | Frontier Len: {frontier.get_lenght()}")
+        print(f"Moviments: {moviments} | A*: {node.heuristic_value} | Frontier Len: {frontier.get_lenght()}")
 
         # expanding node
         for movie, neighbor in neighbors_for_person(node.state):
