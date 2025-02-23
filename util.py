@@ -43,9 +43,12 @@ class QueueFrontier(StackFrontier):
     def get_one_and_remove(self):
         if self.empty():
             raise Exception("empty frontier")
-        else:
-            self.frontier.sort(key=self.sortFn, reverse=True)
-
-            node = self.frontier[0]
-            self.frontier = self.frontier[1:]
-            return node
+        
+        max_a_value = 0
+        index = 0
+        for i, node in enumerate(self.frontier):
+            if node.heuristic_value and node.heuristic_value > max_a_value:
+                max_a_value = node.heuristic_value
+                index = i 
+     
+        return self.frontier.pop(index)
