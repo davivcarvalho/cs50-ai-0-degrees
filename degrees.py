@@ -12,7 +12,7 @@ people = {}
 # Maps movie_ids to a dictionary of: title, year, stars (a set of person_ids)
 movies = {}
 
-moviments = 0
+
 
 def load_data(directory):
     """
@@ -97,12 +97,12 @@ def shortest_path(source, target):
     frontier = QueueFrontier()
     explored_set = set()
     path_cost = -1
+    moviments = 0
 
     #init the frontier with start node
     frontier.add(node)
 
     while True: 
-        global moviments
         moviments += 1
         path_cost += 1
 
@@ -146,7 +146,6 @@ def get_a_star_n(neighbor, movie, path_cost):
     return ((neighbor_movies + neighbor_movies_stars)/500) - path_cost
 
 def get_path(node):
-    print(f"{moviments} movimentos necessários!")
     path = []
     while node.parent:
         path.append((node.action, node.state))
