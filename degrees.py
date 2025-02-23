@@ -114,6 +114,11 @@ def shortest_path(source, target):
         node = frontier.get_one_and_remove()
         explored_set.add(node.state)
 
+        # return path if expanded_node is target
+        if (node.state == target):
+            return get_path(node)
+
+
         print(f"Moviments: {moviments} | A*: {node.heuristic_value} | Frontier Len: {frontier.get_lenght()}")
 
         # expanding node
