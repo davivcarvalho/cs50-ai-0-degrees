@@ -142,13 +142,13 @@ def shortest_path(source, target):
 
 
 def get_a_star_n(neighbor, movie, path_cost):
-    neighbor_movies_stars = 0
-    for movie in people[neighbor]['movies']:
-        neighbor_movies_stars = len(movies[movie]['stars'])
+    # neighbor_movies_stars = 0
+    # for movie in people[neighbor]['movies']:
+    #     neighbor_movies_stars = len(movies[movie]['stars'])
 
     neighbor_movies = len(people[neighbor]['movies'])
 
-    return ((neighbor_movies + neighbor_movies_stars)/500) - path_cost
+    return ((neighbor_movies)/100) - path_cost
 
 def get_path(node):
     path = []
