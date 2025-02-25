@@ -93,19 +93,14 @@ def shortest_path(source, target):
     If no possible path, returns None.
     """
 
-    node = Node(source, None, None, None)
+    node = Node(source, None, None)
     frontier = QueueFrontier()
     explored_set = set()
-    path_cost = -1
-    moviments = 0
 
     #init the frontier with start node
     frontier.add(node)
 
     while True: 
-        moviments += 1
-        path_cost += 1
-
         # return None if not find a possible path
         if (frontier.empty()):
             return None
@@ -118,13 +113,9 @@ def shortest_path(source, target):
         if (node.state == target):
             return get_path(node)
 
-
-        print(f"Moviments: {moviments} | A*: {node.heuristic_value} | Frontier Len: {frontier.get_lenght()}")
-
         # expanding node
         for movie, neighbor in neighbors_for_person(node.state):
-            a_value = get_a_star_n(neighbor, movie, path_cost)
-            expanded_node = Node(neighbor, node, movie, a_value)
+            expanded_node = Node(neighbor, node, movie)
             
             # return path if expanded_node is target
             if (expanded_node.state == target):
@@ -140,15 +131,6 @@ def shortest_path(source, target):
 
             frontier.add(expanded_node)
 
-
-def get_a_star_n(neighbor, movie, path_cost):
-    # neighbor_movies_stars = 0
-    # for movie in people[neighbor]['movies']:
-    #     neighbor_movies_stars = len(movies[movie]['stars'])
-
-    neighbor_movies = len(people[neighbor]['movies'])
-
-    return ((neighbor_movies)/100) - path_cost
 
 def get_path(node):
     path = []
